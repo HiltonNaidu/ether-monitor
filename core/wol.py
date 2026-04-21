@@ -17,7 +17,7 @@ from dataclasses import dataclass
 logger = logging.getLogger(__name__)
 
 # ── Constants ────────────────────────────────────────────────────────────────
-
+#TODO: get basic defaults from config instead of hardcoding here
 WOL_PORT       = 9          # Standard WoL UDP port (also 7 is common)
 BROADCAST_IP   = "255.255.255.255"
 MAGIC_PREFIX   = b"\xff" * 6

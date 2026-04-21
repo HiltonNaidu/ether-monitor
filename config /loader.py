@@ -1,5 +1,5 @@
 """
-config.py - Configuration loader
+loader.py - Configuration loader
 
 Loads config.yaml (or a custom path via env var) and exposes typed,
 validated config sections as dataclasses. All other modules should
