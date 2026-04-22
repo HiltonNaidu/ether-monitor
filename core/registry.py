@@ -21,7 +21,7 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 # TODO: replace with get_config() once config resolution is sorted
-DEFAULT_DB_PATH = "data/devices.db"
+DEFAULT_DB_PATH = "db/devices.db"
 
 
 # ── Data types ────────────────────────────────────────────────────────────────
@@ -315,4 +315,29 @@ def _row_to_device(row: sqlite3.Row) -> Device:
         last_ping_ms = row["last_ping_ms"],
         is_online    = bool(row["is_online"]),
         added_at     = row["added_at"],
+    )
+
+if __name__ == "__main__":
+    # Simple test/demo of the registry functionality
+    registry = Registry()
+
+    # Clear existing devices for demo purposes
+    with registry._connect() as conn:
+        conn.execute("DELETE FROM devices")
+
+    print("Adding devices...")
+    registry.add("AA:BB:CC:DD:EE:FF", alias="gaming-pc")
+    registry.add("11:22:33:44:55:66", alias="laptop")
+
+    print("\nAll devices:")
+    for device in registry.list_all():
+        print(device)
+
+    print("\nResolving 'gaming-pc':")
+    print(registry.resolve("gaming-pc"))
+
+    print("\nUpdating network info for 'gaming-pc'...")
+    registry.update_network_info(
+        mac="AA:BB:CC:DD:EE:FF",
+        ip="192.168.1.100"
     )
