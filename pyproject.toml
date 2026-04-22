@@ -1,5 +1,5 @@
 [project]
-name = "ether-monitor"
+name = "ethmon"
 version = "0.1.0"
 requires-python = ">=3.11"
 
@@ -15,3 +15,6 @@ build-backend = "setuptools.build_meta"     # ← this was wrong before
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[project.scripts]
+ethmon = "cli.main:cli"
